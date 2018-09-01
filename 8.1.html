@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>分享</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0 10px;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        h2 {
+            cursor: pointer;
+        }
+        
+        p {
+            display: none;
+            color: red
+        }
+        
+        #box {
+            width: 300px;
+            height: 60px;
+            border: 5px solid red;
+            margin: 100px auto;
+            color: #ff0000;
+            line-height: 60px;
+            text-align: center;
+            font-size: 40px;
+            position: fixed;
+            right: 50px;
+            top: 30%;
+        }
+        
+        div {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">随机点名</div>
+    <ul>
+        <li>
+            <h2>
+                1.function fn(a){<br> &nbsp;&nbsp;&nbsp;alert(a); <br> &nbsp;&nbsp;&nbsp;a=2;<br> &nbsp;&nbsp;&nbsp;alert(a); <br> &nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;fn();<br> &nbsp;&nbsp;&nbsp;alert(a);
+                <br>
+            </h2>
+            <p>
+                答案：<br>undefined<br> 2<br>报错
+            </p>
+        </li><br/>
+
+        <li>
+            <h2>2.console.log(3||2&&5||0)<br>	
+                
+
+            </h2>
+            <p>
+                答案： 3<br>&&优先级高于||</p>
+        </li><br/>
+
+
+        <li>
+            <h2>
+                3.var num = 10; <br>&nbsp;&nbsp;&nbsp;var obj = {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num:8,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inner: {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num: 6,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print: function () {<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("num: "+num+" , this.num: "+this.num);<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp; num = 888;<br> &nbsp;&nbsp;&nbsp;obj.inner.print(); 
+                <div>
+                    <div id="scdiv"></div>
+                </div>
+            </h2>
+            <p>
+                答案：num: 888 , this.num: 6
+                <br/>
+
+            </p>
+        </li>
+
+        <li>
+            <h2>4.var name = "this is window";<br> &nbsp;&nbsp;&nbsp;var testObj = { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name : "this is testObj", <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; getName:function (){<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var handle=function (){<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.log(this); <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.log(this.name);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; handle();<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;testObj.getName();<br> &nbsp;&nbsp;&nbsp;
+            </h2>
+            <p>
+                答案：window<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this is window<br>
+            </p>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        var arrname = ['邹榛', '陆嵘', '杨康乐', '陈晓斌', '宋泽文', '塔伊尔.奥斯曼', '张玉芹', '杨超', '吴国建', '王伟强', '李亚南', '段瑞杰', '项祉铭', '袁宁博', '王威', '元蓓', '胡江民', '刘超', '冯杨涛', '李莉', '李勇', '钱慧珍', '鲍御', '薇文辉', '卢雪晴', '耿春文', '彭文品', '张成龙', '程军港', '胡文杰', '杜亚欣', '袁帅博', '乔俊华', '段冬毅', '吴晨敏', '彭文欣', '高宇鑫', '李强', '王立铭', '吕明杰', '章圣浪', '陈俊', '陈德良', '时析序', '黄步威', '黄慧姝', '余超', '艾平飞', '张贺', '胡熠晨', '应宇峰'];
+        var oBox = document.getElementById('box');
+        var num = 0;
+        var timer = null;
+        var bstop = true;
+
+        function ranName() {
+            num = parseInt(Math.random() * arrname.length); //0-11
+            oBox.innerHTML = arrname[num];
+        }
+
+        timer = setInterval(ranName, 1);
+
+        //通过空格键控制开始和停止
+        document.onkeydown = function(event) { //event:事件对象   keyCode:获取键码
+            if (event.keyCode == 32 && bstop) {
+                clearInterval(timer);
+                bstop = false;
+            } else {
+                timer = setInterval(ranName, 5);
+                bstop = true;
+            }
+        }
+
+        var oH2 = document.getElementsByTagName('h2');
+        var oP = document.getElementsByTagName('p');
+        var tstop = true;
+        for (var i = 0; i < oH2.length; i++) {
+            oH2[i].onclick = function() {
+                if (tstop) {
+                    this.nextElementSibling.style.display = 'block';
+                    tstop = !tstop;
+                } else {
+                    this.nextElementSibling.style.display = 'none';
+                    tstop = !tstop;
+                }
+
+            }
+        }
+    </script>
+</body>
+
+</html>
